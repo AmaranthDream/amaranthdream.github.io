@@ -3,25 +3,105 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Amaranth Dream's homepage</title>
+  <title>Meawsuring</title>
   <!--[if IE]>
    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
   <style>
 	body{
-		display: -webkit-flex; 
-		display: flex;
-		flex-grow: 1;		
 		background: url(bg.svg);
+		font-size: 3em;
+		text-align: center; 
+		position:absolute;
+		height:100%;
 	}
-	  div{
-	  	background-color:white;
-	  }
+	input { 
+	font-size: 2em;
+    text-align: center; 
+	}
+	.w100{
+		width:100%;
+	}
+	.w50{
+		width:50%;
+	}
+	#content{
+		display: flex;
+		display: -webkit-flex; 
+		flex-direction:column;
+		width:100$;
+		height:100%;
+	}
+	#input_div{
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: center;
+		height:50%;
+
+	}
+	#input_ml{
+
+		display: flex;
+		flex-flow: row nowrap;
+		align-items:center;
+		align-self:stretch;
+		flex: 1 1 1;
+
+	}
+	#input_time{
+
+		display: flex;
+		flex-flow: row nowrap;
+		align-items:center;
+		flex: 1 1 2;
+
+	}
   </style>
 </head>
   <body>
-	  <div>
-    Hello There
+	  <div id="content">
+		<div id="input_div">
+			<div id="input_ml">
+				<input id="input_ml_" class="w100" type="number" min="0" value="0">
+				мл
+				</input>
+			</div>
+			<div id="input_time">
+				<input id="input_hours_" class="w50"  type="number" min="0" value="0">
+				ч.
+			</input>
+			<input  id="input_minutes_" class="w50" type="number" min="0" value="0">
+				мин.
+			</input>
+		  </div>
+		</div>
+		<div id="output">
+			<span id="mewsuring">0</span><span>мл/ч</span>
+		</div>
+		
 	  </div>
+	  <script type="text/javascript">
+		const input_ml=document.getElementById("input_ml_");
+		const input_hours=document.getElementById("input_hours_");
+		const input_minutes=document.getElementById("input_minutes_");
+		const mewsuring=document.getElementById("mewsuring");
+		
+		input_ml.addEventListener("input",(e)=>{Calculate();})
+		input_hours.addEventListener("input",(e)=>{Calculate();})
+		input_minutes.addEventListener("input",(e)=>{Calculate();})
+		
+		const Calculate=()=>{
+			let ml=Number(input_ml.value);
+			let hours=Number(input_hours.value);
+			let minutes=Number(input_minutes.value);
+			let mewsuring_=(ml/(hours*60+minutes))*60;
+			if (mewsuring_==NaN||mewsuring_==Infinity){
+				mewsuring.innerHTML="---"
+			}else{
+				mewsuring.innerHTML=mewsuring_;
+			}
+			
+		}
+	  </script>
   </body>
 </html>
